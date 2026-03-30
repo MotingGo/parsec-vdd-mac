@@ -12,16 +12,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # TODO: Add build steps here when real app is ready
+      - name: Build
+        run: swift build -c release
 
       # TODO: Add code signing here
+
+      - name: Prepare DMG contents
+        run: |
+          mkdir -p dmg-contents
+          cp .build/release/parsec-vdd dmg-contents/
+          cp README.md dmg-contents/ 2>/dev/null || true
 
       # TODO: Customize DMG appearance
       - name: Create DMG
         run: |
           hdiutil create \
             -volname "ParsecVDD" \
-            -srcfolder app \
+            -srcfolder dmg-contents \
             -ov \
             -format UDZO \
             ParsecVDD.dmg
