@@ -1,5 +1,6 @@
 import Foundation
 import CoreGraphics
+import CGVirtualDisplayPrivate
 
 // MARK: - Argument Parsing
 

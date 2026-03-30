@@ -5,13 +5,14 @@ let package = Package(
     name: "parsec-vdd",
     platforms: [.macOS(.v12)],
     targets: [
+        .systemLibrary(
+            name: "CGVirtualDisplayPrivate",
+            path: "Sources/CGVirtualDisplayPrivate"
+        ),
         .executableTarget(
             name: "parsec-vdd",
+            dependencies: ["CGVirtualDisplayPrivate"],
             path: "Sources/parsec-vdd",
-            publicHeadersPath: "include",
-            cSettings: [
-                .headerSearchPath("include"),
-            ],
             linkerSettings: [
                 .linkedFramework("CoreGraphics"),
             ]
