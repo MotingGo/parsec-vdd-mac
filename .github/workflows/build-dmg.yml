@@ -1,0 +1,33 @@
+name: Build DMG
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-dmg:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # TODO: Add build steps here when real app is ready
+
+      # TODO: Add code signing here
+
+      # TODO: Customize DMG appearance
+      - name: Create DMG
+        run: |
+          hdiutil create \
+            -volname "ParsecVDD" \
+            -srcfolder app \
+            -ov \
+            -format UDZO \
+            ParsecVDD.dmg
+
+      - name: Upload DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: ParsecVDD-dmg
+          path: ParsecVDD.dmg
